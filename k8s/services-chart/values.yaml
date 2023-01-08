@@ -1,0 +1,32 @@
+domain: lanf0rd.cloud.okteto.net
+gateway:
+  name: gateway
+  repo: lanf0rd/lanf0rdrep:gateway
+  port: 8080
+ticket:
+  name: ticket
+  repo: lanf0rd/lanf0rdrep:ticket
+  port: 8070
+bonus:
+  name: bonus
+  repo: lanf0rd/lanf0rdrep:bonus
+  port: 8050
+flight:
+  name: flight
+  repo: lanf0rd/lanf0rdrep:flight
+  port: 8060
+postgres:
+  name: postgres
+  repo: library/postgres:13
+  port: 5432
+  default_database:
+    name: postgres
+    user: postgres
+    password: postgres
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 200m
+      memory: 1024Mi
