@@ -34,41 +34,15 @@
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "scope",
-									"value": "openid",
-									"type": "text"
-								},
-								{
-									"key": "grant_type",
-									"value": "password",
-									"type": "text"
-								},
-								{
-									"key": "username",
-									"value": "{{username}}",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "{{password}}",
-									"type": "text"
-								},
-								{
-									"key": "clientId",
-									"value": "{{clientId}}",
-									"type": "text"
-								},
-								{
-									"key": "clientSecret",
-									"value": "{{clientSecret}}",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\"client_id\":\"pKaBym8vNW6pAvJw0vxY8GDMFrOW1SFO\",\"client_secret\":\"_yoz1-7AYGTjFCFv0vAGtRaF-c9CtoHsjVhjCjgXThB31kCXUoM7-9Eo3YhsvLtz\",\"audience\":\"http://127.0.0.1:8080\",\"grant_type\":\"password\",\"username\":\"rsoi5.test@mail.ru\",\"password\":\"rsoi5.test\",\"scope\":\"openid\"}"
 						},
 						"url": {
 							"raw": "{{identityProviderUrl}}/oauth/token",
