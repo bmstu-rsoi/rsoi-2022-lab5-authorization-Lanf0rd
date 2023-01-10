@@ -4,32 +4,32 @@
 	"values": [
 		{
 			"key": "serviceUrl",
-			"value": "",
+			"value": "http://app.lanf0rd.cloud.okteto.net",
 			"enabled": true
 		},
 		{
 			"key": "identityProviderUrl",
-			"value": "",
+			"value": "dev-fsjpqiin4sax6pgn.us.auth0.com",
 			"enabled": true
 		},
 		{
 			"key": "username",
-			"value": "",
+			"value": "rsoi5.test@mail.ru",
 			"enabled": true
 		},
 		{
 			"key": "password",
-			"value": "",
+			"value": "rsoi5.test",
 			"enabled": true
 		},
 		{
 			"key": "clientId",
-			"value": "",
+			"value": "pKaBym8vNW6pAvJw0vxY8GDMFrOW1SFO",
 			"enabled": true
 		},
 		{
 			"key": "clientSecret",
-			"value": "",
+			"value": "_yoz1-7AYGTjFCFv0vAGtRaF-c9CtoHsjVhjCjgXThB31kCXUoM7-9Eo3YhsvLtz",
 			"enabled": true
 		}
 	],
