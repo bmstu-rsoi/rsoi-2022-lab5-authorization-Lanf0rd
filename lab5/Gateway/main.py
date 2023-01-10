@@ -173,7 +173,11 @@ class Server:
         return Response(status = 204)
 
     def get_me(self):
-        ##already in methods
+        bearer = request.headers.get('Authorization')
+        if bearer == None:
+            return Response(status=401)
+        if not(self.check_jwt(bearer)):
+            return Response(status=401)
         response_tickets = self.get_tickets()
         response_bonuses = self.get_privelege()
         response_me = dict(tickets = response_tickets, privilege = response_bonuses)
