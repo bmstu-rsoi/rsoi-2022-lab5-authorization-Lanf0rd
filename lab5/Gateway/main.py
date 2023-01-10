@@ -26,12 +26,24 @@ class Server:
         return self.app.run(host = self.host, port = self.port)
     def get_say_ok(self):
         return "OK"
+
+    def check_jwt(self, bearer):
+        try:
+            jwt_token = bearer.split()[1]
+            signing_key = self.jwks.get_signing_key_from_jwt(jwt_token)
+            data = jwt.decode(jwt_token,
+            signing_key.key,algorithms=["RS256"],
+            audience="http://127.0.0.1:8080",options={"verify_exp": False})
+            return data["name"]
+        except:
+            return False
     
     def get_flights(self):
         bearer = request.headers.get('Authorization')
         if bearer == None:
             return Response(status=401)
-        ##JWK our JWT
+        if not(self.check_jwt(bearer)):
+            return Response(status=401)
         param_page = request.args.get("page", default = 0, type = int)
         param_size = request.args.get("size", default = 0, type = int)
         url = "http://flight:" + str(self.Flights) + "/api/v1/flights"
@@ -45,9 +57,10 @@ class Server:
         bearer = request.headers.get('Authorization')
         if bearer == None:
             return Response(status=401)
-        ##JWK our JWT
-        ##get client from jwt
-        client = request.headers.get("X-User-Name")
+        client = self.check_jwt(bearer)
+        if not(client):
+            return Response(status=401)
+        ##client = request.headers.get("X-User-Name")
         url1 = "http://ticket:" + str(self.Tickets) + "/api/v1/tickets"
         url2 = "http://flight:" + str(self.Flights) + "/api/v1/flight_by_number"
 
@@ -71,9 +84,10 @@ class Server:
         bearer = request.headers.get('Authorization')
         if bearer == None:
             return Response(status=401)
-        ##JWK our JWT
-        ##get client from jwt
-        client = request.headers.get("X-User-Name")
+        client = self.check_jwt(bearer)
+        if not(client):
+            return Response(status=401)
+        ##client = request.headers.get("X-User-Name")
         buy_inf = request.json
         url1 = "http://flight:" + str(self.Flights) + "/api/v1/flight_by_number"
         url2 = "http://ticket:" + str(self.Tickets) + "/api/v1/ticket"
@@ -116,9 +130,10 @@ class Server:
         bearer = request.headers.get('Authorization')
         if bearer == None:
             return Response(status=401)
-        ##JWK our JWT
-        ##get client from jwt
-        client = request.headers.get("X-User-Name")
+        client = self.check_jwt(bearer)
+        if not(client):
+            return Response(status=401)
+        ##client = request.headers.get("X-User-Name")
         url1 = "http://ticket:" + str(self.Tickets) + "/api/v1/tickets/" + ticketUid
         url2 = "http://flight:" + str(self.Flights) + "/api/v1/flight_by_number"
 
@@ -142,9 +157,10 @@ class Server:
         bearer = request.headers.get('Authorization')
         if bearer == None:
             return Response(status=401)
-        ##JWK our JWT
-        ##get client from jwt
-        client = request.headers.get("X-User-Name")
+        client = self.check_jwt(bearer)
+        if not(client):
+            return Response(status=401)
+        ##client = request.headers.get("X-User-Name")
         url1 = "http://ticket:" + str(self.Tickets) + "/api/v1/tickets/" + ticketUid
         url2 = "http://bonus:" + str(self.Bonuses) + "/api/v1/privilege/" + ticketUid
 
@@ -167,9 +183,10 @@ class Server:
         bearer = request.headers.get('Authorization')
         if bearer == None:
             return Response(status=401)
-        ##JWK our JWT
-        ##get client from jwt
-        client = request.headers.get("X-User-Name")
+        client = self.check_jwt(bearer)
+        if not(client):
+            return Response(status=401)
+        ##client = request.headers.get("X-User-Name")
         url = "http://bonus:" + str(self.Bonuses) + "/api/v1/privilege"
         
         response = requests.get(url, headers={"X-User-Name": client})
